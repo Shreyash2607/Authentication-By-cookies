@@ -16,8 +16,12 @@ app.set('view engine', 'ejs');
 
 // database connection
 const dbURI = 'mongodb+srv://Shreyash:Shreyash123@cluster0.1t8zl.mongodb.net/Test?retryWrites=true&w=majority';
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = 3000;
+}
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex:true })
-  .then((result) => app.listen(3000))
+  .then((result) => app.listen(port),() => {console.log('server started sucessfully')})
   .catch((err) => console.log(err));
 
 // routes
